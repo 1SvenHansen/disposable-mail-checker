@@ -7,7 +7,7 @@ import { ReactComponent as SpamSvg } from './assets/spam.svg';
 import { ReactComponent as MarketingSvg } from './assets/marketing.svg';
 
 function App() {
-	const [email, setEmail] = useState('');
+	const [emailInput, setEmailInput] = useState('');
 	const [response, setResponse] = useState('');
 	const [error, setError] = useState('');
 
@@ -17,48 +17,46 @@ function App() {
 		setResponse('');
 		setError('');
 
+		const email = emailInput.substring(emailInput.lastIndexOf('@') + 1);
+
 		try {
-			console.log(email);
 			validateDisposableEmailAddress(email);
-			axios.get(`/domain/` + email.substring(email.lastIndexOf("@") +1)).then(
+			axios.get(`/domain/` + email).then(
 				(res) => {
-					res.data.disposable ? setError(email + ' is disposable') : setResponse(email + ' is not disposable');
+					res.data.disposable
+						? setError(email + ' is disposable')
+						: setResponse(email + ' is not disposable');
 				},
 				(err) => {
 					setError(err.response.data.error);
 				},
 			);
 		} catch (error) {
-			console.log(error);
 			setError(error.message);
-			return;
 		}
 
-		setEmail('');
+		setEmailInput('');
 	};
 
 	return (
 		<div className="app">
-			{/* <div className="app__navbar"></div> */}
 			<div className="app__header">
 				<h1>Free Disposable Email Checker</h1>
 			</div>
 			<form className="app__form" onSubmit={checkDisposableEmail}>
 				<img src={require('./assets/mail.png')} alt="envelope icon" />
-				<div className="app__form-input">
-					<label className="input">
-						<input
-							className="input__field"
-							onChange={(e) => setEmail(e.target.value)}
-							type="text"
-							placeholder=" "
-						/>
-						<span className="input__label">Email Address or Domain Name</span>
-					</label>
-					<button type="submit" className="app__button-submit">
-						Validate
-					</button>
-				</div>
+				<label className="app__form-input">
+					<input
+						className="app__form-input-field"
+						onChange={(e) => setEmailInput(e.target.value)}
+						type="text"
+						placeholder=" "
+					/>
+					<span className="app__form-input-label">Email Address or Domain Name</span>
+				</label>
+				<button type="submit" className="app__form-submit">
+					Validate
+				</button>
 				<div className="response">{response ? <p>{response}</p> : null}</div>
 				<div className="error">{error ? <p>{error}</p> : null}</div>
 			</form>
