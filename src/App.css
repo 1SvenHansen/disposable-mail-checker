@@ -1,38 +1,145 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:400,700&display=swap');
+* {
+	font-family: 'Work Sans', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.app {
+	background-color: #f2f2f2;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.app__navbar {
+	height: 50px;
+	width: 100%;
+	background-color: white;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.app__header {
+	background-color: #3c4d93;
+	padding: 60px;
+	height: 125px;
+	text-align: center;
+	color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.app__form-input {
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.app__form {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	max-width: 900px;
+	padding: 40px 0;
+	flex-grow: 1;
+	background-color: white;
+	border-radius: 15px;
+	margin: auto;
+	margin-top: -50px;
+	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+}
+
+@media only screen and (max-width: 600px) {
+	.app__form {
+		margin: -30px 15px 0 15px;
+	}
+	.app__form-input {
+		flex-direction: column;
+	}
+	.app__button-submit {
+		margin-top: 20px;
+	}
+}
+
+.app__button-submit {
+	background-color: #3c4d93;
+	color: white;
+	border: none;
+	padding: 10px;
+	cursor: pointer;
+	font-size: 1.2rem;
+	margin-left: 10px;
+	border-radius: 4px;
+}
+
+.response {
+	color: green;
+}
+
+.error {
+	color: red;
+}
+
+.input {
+	position: relative;
+}
+.input__label {
+	position: absolute;
+	left: 5px;
+	top: 8px;
+	padding: 0 0 2px 0;
+	margin: calc(4px * 0.75 + 3px) calc(4px * 0.5);
+	transform-origin: 0 0;
+	background: white;
+	transition: transform 150ms ease-in;
+	font-weight: 400;
+	line-height: 1.2;
+}
+.input__field {
+	line-height: 1.4;
+	font-family: 'Inter', sans-serif;
+	font-size: 1rem;
+	font-weight: 300;
+	padding: 0 5px;
+	box-sizing: border-box;
+	display: block;
+	width: 300px;
+	height: 50px;
+	border: 1px solid #aaa;
+	padding: 10px;
+	color: currentColor;
+	background: transparent;
+	border-radius: 5px;
+}
+
+.input__field:focus, .input__field:active {
+	outline: none;
+}
+
+.input__field:focus + .input__label,
+.input__field:not(:placeholder-shown) + .input__label {
+	transform: translate(0.25rem, -100%) scale(0.85);
+}
+
+.information-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+	gap: 20px;
+	max-width: 1200px;
+	margin: 50px auto;
+}
+
+.information-grid__item {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	text-align: center;
+	margin: 0 40px;
+}
+
+.information-grid__item h2 {
+	color: #2c3038;
+}
+
+.information-grid__item p {
+	color: #555a62;
+}
+
+.information-grid__item-icon {
+	width: 32px;
+	height: 32px;
+	filter: invert(29%) sepia(15%) saturate(2667%) hue-rotate(193deg) brightness(92%) contrast(88%);
 }
